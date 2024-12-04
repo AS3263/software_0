@@ -34,7 +34,6 @@
             this.btnSend_chat = new System.Windows.Forms.Button();
             this.txtUserInput = new System.Windows.Forms.TextBox();
             this.rtbChatHistory = new System.Windows.Forms.RichTextBox();
-            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.panel2 = new System.Windows.Forms.Panel();
             this.Memebrship_icon = new System.Windows.Forms.PictureBox();
             this.Event_icon = new System.Windows.Forms.PictureBox();
@@ -88,7 +87,6 @@
             this.ChatboxBorder.Controls.Add(this.btnSend_chat);
             this.ChatboxBorder.Controls.Add(this.txtUserInput);
             this.ChatboxBorder.Controls.Add(this.rtbChatHistory);
-            this.ChatboxBorder.Controls.Add(this.vScrollBar1);
             this.ChatboxBorder.Location = new System.Drawing.Point(36, 109);
             this.ChatboxBorder.Name = "ChatboxBorder";
             this.ChatboxBorder.Size = new System.Drawing.Size(1056, 610);
@@ -97,11 +95,11 @@
             // 
             // btnSend_chat
             // 
-            this.btnSend_chat.Location = new System.Drawing.Point(924, 556);
+            this.btnSend_chat.Location = new System.Drawing.Point(973, 555);
             this.btnSend_chat.Name = "btnSend_chat";
             this.btnSend_chat.Size = new System.Drawing.Size(68, 23);
             this.btnSend_chat.TabIndex = 6;
-            this.btnSend_chat.Text = "button7";
+            this.btnSend_chat.Text = "Send";
             this.btnSend_chat.UseVisualStyleBackColor = true;
             this.btnSend_chat.Click += new System.EventHandler(this.btnSend_Click);
             // 
@@ -109,7 +107,7 @@
             // 
             this.txtUserInput.Location = new System.Drawing.Point(38, 556);
             this.txtUserInput.Name = "txtUserInput";
-            this.txtUserInput.Size = new System.Drawing.Size(880, 22);
+            this.txtUserInput.Size = new System.Drawing.Size(929, 22);
             this.txtUserInput.TabIndex = 5;
             this.txtUserInput.TextChanged += new System.EventHandler(this.txtUserInput_TextChanged);
             // 
@@ -117,18 +115,10 @@
             // 
             this.rtbChatHistory.Location = new System.Drawing.Point(16, 13);
             this.rtbChatHistory.Name = "rtbChatHistory";
-            this.rtbChatHistory.Size = new System.Drawing.Size(991, 581);
+            this.rtbChatHistory.Size = new System.Drawing.Size(1037, 581);
             this.rtbChatHistory.TabIndex = 4;
             this.rtbChatHistory.Text = "";
             this.rtbChatHistory.TextChanged += new System.EventHandler(this.rtbChatHistory_TextChanged);
-            // 
-            // vScrollBar1
-            // 
-            this.vScrollBar1.Location = new System.Drawing.Point(1021, 13);
-            this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(21, 581);
-            this.vScrollBar1.TabIndex = 3;
-            this.vScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar1_Scroll);
             // 
             // panel2
             // 
@@ -294,7 +284,6 @@
         private System.Windows.Forms.Button btnSend_chat;
         private System.Windows.Forms.TextBox txtUserInput;
         private System.Windows.Forms.RichTextBox rtbChatHistory;
-        private System.Windows.Forms.VScrollBar vScrollBar1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox Memebrship_icon;
         private System.Windows.Forms.PictureBox Event_icon;

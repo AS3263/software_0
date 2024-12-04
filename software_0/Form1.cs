@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.AspNetCore.SignalR.Client;
-// check it
+
 namespace software_0
 {
     public partial class Form1 : Form
@@ -45,12 +45,12 @@ namespace software_0
             // Handle real-time messages
             connection.On<string, string, string>("ReceiveMessage", (username, message, senderConnectionId) =>
             {
-                if (senderConnectionId != connection.ConnectionId)
+                if (senderConnectionId != connection.ConnectionId) // Avoid duplicating the sender's messages
                 {
                     DisplayMessage(username, message);
                 }
             });
-            
+
             // Handle message history
             connection.On<List<Tuple<string, string>>>("ReceiveMessageHistory", (messages) =>
             {
@@ -60,10 +60,19 @@ namespace software_0
                 }
             });
 
+            // Handle notifications for new clients joining
+            connection.On<string>("NotifyNewClient", (notification) =>
+            {
+                DisplayMessage("System", notification);
+            });
+
             try
             {
                 await connection.StartAsync();
                 DisplayMessage("System", "Connected to chat server!");
+
+                // Notify the server of the new client's username
+                await connection.InvokeAsync("NotifyNewClientJoin", clientUsername);
             }
             catch (Exception ex)
             {
@@ -86,7 +95,7 @@ namespace software_0
                     // Display the message locally for the sender
                     DisplayMessage(clientUsername, userMessage);
 
-                    txtUserInput.Clear();  // Clear the text input after sending
+                    txtUserInput.Clear(); // Clear the text input after sending
                 }
                 catch (Exception ex)
                 {
@@ -102,16 +111,15 @@ namespace software_0
         // Send a message when the Enter key is pressed
         private void TxtUserInput_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)  // Check if the Enter key was pressed
+            if (e.KeyCode == Keys.Enter) // Check if the Enter key was pressed
             {
-                btnSend_Click(this, EventArgs.Empty);  // Call the send button click method
-                e.Handled = true;  // Prevent default behavior (e.g., a newline in the textbox)
-                e.SuppressKeyPress = true;  // Suppress the Enter key press so it doesn't add a new line
+                btnSend_Click(this, EventArgs.Empty); // Call the send button click method
+                e.Handled = true; // Prevent default behavior (e.g., a newline in the textbox)
+                e.SuppressKeyPress = true; // Suppress the Enter key press so it doesn't add a new line
             }
         }
 
         // Event handlers for other UI components (placeholders)
-
         private void panel2_Paint(object sender, PaintEventArgs e) { }
         private void ChatboxBorder_Paint(object sender, PaintEventArgs e) { }
         private void panel3_Paint(object sender, PaintEventArgs e) { }
@@ -130,7 +138,5 @@ namespace software_0
         private void Home_Click(object sender, EventArgs e) { }
         private void Profile_Click(object sender, EventArgs e) { }
         private void panel1_Paint(object sender, PaintEventArgs e) { }
-        
-        
     }
 }
